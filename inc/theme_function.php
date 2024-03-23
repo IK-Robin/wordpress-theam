@@ -77,6 +77,31 @@ function ikr_customizar_register($wp_customize){
     'type' => 'select',
     'choices' => customizer_category_choices(), // Function to retrieve category choices
 ));
+// Add customizer controls for selecting additional categories
+$wp_customize->add_setting('ikr_custom_post_setting_2', array(
+  'default' => '',
+  'sanitize_callback' => 'absint', 
+));
+
+$wp_customize->add_control('ikr_custom_post_setting_2', array(
+  'label' => __('Select Second Category for Posts 2', 'ikrobin'),
+  'section' => 'ikr_custom_post_catagory',
+  'type' => 'select',
+  'choices' => customizer_category_choices(), // Function to retrieve category choices
+));
+
+$wp_customize->add_setting('ikr_custom_post_setting_3', array(
+  'default' => '',
+  'sanitize_callback' => 'absint', 
+));
+
+$wp_customize->add_control('ikr_custom_post_setting_3', array(
+  'label' => __('Select Third Category for Posts 3', 'ikrobin'),
+  'section' => 'ikr_custom_post_catagory',
+  'type' => 'select',
+  'choices' => customizer_category_choices(), // Function to retrieve category choices
+));
+
 
 }
 

@@ -11,6 +11,7 @@ add_image_size('post-thumbnails', 200, 200, true);
 
 
 
+// ikr_excerpt_more
 function ikr_excerpt_more($more) {
   global $post; // Access the global $post variable
 
