@@ -1,6 +1,6 @@
 <?php
 
-function ali_customizar_register($wp_customize){
+function ikr_customizar_register($wp_customize){
 
   //Header Area Function
   $wp_customize->add_section('ali_header_area', array(
@@ -60,6 +60,36 @@ function ali_customizar_register($wp_customize){
     'section' => 'ali_footer_option',
   ));
 
+
+
+  // add custom post catagory 
+  $wp_customize -> add_section('ikr_custom_post_catagory',[
+    'title'       => __('Custom Post Category','ikrobin'),
+    'description' => 'Add Custom Catagories for posts.',
+  ]);
+  $wp_customize-> add_setting('ikr_custom_post_setting',[
+    'default' => '',
+    'sanitize_callback' => 'absint', 
+  ]);
+  $wp_customize->add_control('ikr_custom_post_setting', array(
+    'label' => __('Select Category for Next Three Posts', 'ikrobin'),
+    'section' => 'ikr_custom_post_catagory',
+    'type' => 'select',
+    'choices' => customizer_category_choices(), // Function to retrieve category choices
+));
+
 }
 
-add_action('customize_register', 'ali_customizar_register');
+add_action('customize_register', 'ikr_customizar_register');
+
+
+
+// Function to retrieve category choices
+function customizer_category_choices() {
+  $categories = get_categories();
+  $choices = array();
+  foreach ($categories as $category) {
+      $choices[$category->term_id] = $category->name;
+  }
+  return $choices;
+}

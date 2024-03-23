@@ -19,7 +19,7 @@ $latest_posts_query = new WP_Query(array(
 
 // Second Query: Get the next three posts from a specific category
 $category_posts_query = new WP_Query(array(
-    'cat' => 'your_category_id', // Replace 'your_category_id' with the actual category ID
+    'cat' => get_theme_mod('ikr_custom_post_setting'), // Replace 'your_category_id' with the actual category ID
     'posts_per_page' => 3,
     'orderby' => 'date',
     'order' => 'DESC'
@@ -77,11 +77,12 @@ endif;
 
 
 
-    if (have_posts()) :
-        while (have_posts()) : the_post();
-    ?>
-
-            <div class="blog_area">
+/** show the catagory wize post  */
+// Output category posts
+if ($category_posts_query->have_posts()) :
+    while ($category_posts_query->have_posts()) : $category_posts_query->the_post();
+?>
+       <div class="blog_area">
                 <div class="post_thumb">
                     <a href="<?php the_permalink(); ?>"><?php echo the_post_thumbnail('post-thumbnails'); ?></a>
                 </div>
@@ -113,14 +114,15 @@ endif;
                 </div>
 
             </div>
+<?php
+    endwhile;
+    wp_reset_postdata();
+else :
+    // No posts found
+endif;
 
-    <?php
-        endwhile;
-        wp_reset_postdata();
-    else :
-        _e('No post found');
-    endif;
-    ?>
+?>
+   
 
     
 </div>
